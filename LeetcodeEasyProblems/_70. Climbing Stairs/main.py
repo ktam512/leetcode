@@ -1,4 +1,4 @@
 from Solution import Solution
-hehe = 5
+hehe = 6
 solution_instance = Solution()
 print(solution_instance.climbStairs(hehe))
