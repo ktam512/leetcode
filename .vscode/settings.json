@@ -1,6 +1,7 @@
 {
     "java.project.sourcePaths": [
+        "LeetcodeEasyProblems/_70. Climbing Stairs",
         "LeetcodeEasyProblems/_383. Ransom Note/src",
-        "LeetcodeEasyProblems/_70. Climbing Stairs"
+        "LeetcodeEasyProblems/_409. Longest Palindrome"
     ]
 }
