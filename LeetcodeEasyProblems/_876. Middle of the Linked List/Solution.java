@@ -29,5 +29,6 @@ class Solution {
             count++;
             current = current.next;
         }
+        return count;
     }
 }
