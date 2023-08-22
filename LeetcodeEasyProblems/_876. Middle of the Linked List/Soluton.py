@@ -9,9 +9,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        count = self.length(head)
-        if(count %2 == 0):
-            count += 1
+        count = self.length(head)//2 + 1
         current = head
         while count!= 1:
             current = current.next
@@ -23,7 +21,7 @@ class Solution(object):
     def length(self, head):
         count = 0
         current = head
-        while not current:
+        while current:
             count+=1
             current = current.next
         
