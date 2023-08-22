@@ -11,10 +11,9 @@
 class Solution {
     public ListNode middleNode(ListNode head) {
         ListNode current = head;
-        int count = lengthLinkedList(head)/2 + 1;
-        while(count != 0){
+        int count = lengthLinkedList(head)/2;
+        for (int i = 1; i <= count; i++){
             current = current.next;
-            count--;
         }
 
         return current;
