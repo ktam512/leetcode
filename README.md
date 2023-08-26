@@ -1,2 +1,2 @@
-# leetcode
-A repository to store my Leetcode process
+# Leetcode
+Tracking Leetcode progress
