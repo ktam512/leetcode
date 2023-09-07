@@ -1,8 +1,6 @@
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println(canConstruct("aab","eeeeeeeeaabeeeeeee"));
-    }
+    
 
     public static boolean canConstruct(String ransomNote, String magazine) {
         int [] charCounts = new int[26];
