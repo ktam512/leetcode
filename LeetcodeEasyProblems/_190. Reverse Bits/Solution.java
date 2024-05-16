@@ -1,36 +1,25 @@
 public class Solution {
     // you need treat n as an unsigned value
     public static int reverseBits(int n) {
-        //Turn the integer n into the String for ease of changing it
-        String bitInteger = String.valueOf(n);
-        //If the entered number is not an 32 bit integer, return -1
-        if (bitInteger.length() != 32){
+        // Check if the interger is 32 bit 
+        //if it's not, return -1
+        if (Integer.toString(n).length() != 32){
             return -1;
         }
-        //Create a placeholder character and an empty string
-        char placeholderChar;
-        String  reversedBitInteger = "";
-        // The for loop to take each character in the original string 
-        // mirror it through the central axis 
-        for (int i = 31; i>=0;i--){
-            placeholderChar = bitInteger.charAt(i);
-            reversedBitInteger += placeholderChar;
+        //Create the first bit of the result
+        int result = 0;
+        // The loop iterate 32 times to add 
+        // each bit to the reversed bit
+        for (int i = 0; i < 32; i++){
+            //Shift the result by 1 to the left to wait for the next bit
+            result <<= 1;
+            // Take the least significant digit of the bit n and put it 
+            // to the right side of the bit result
+            result |= (n & 1);
+            //Shift the bit n by 1 to the right to create room for the next bit
+            n >>= 1;
         }
-        // Convert the bit integer to its decimal counterpart and return it
-        int reversedDecimalInteger = 0;
-        for (int i = 31; i >=0; i --){
-            placeholderChar = reversedBitInteger.charAt(i);
-            if (i > 0) {
-                reversedDecimalInteger+= (int)Math.pow(2,(31-i)) * Character.getNumericValue(placeholderChar);
-            } else {
-                // When the most significant digit of the bit is 1, then the sign is negative
-                if (placeholderChar == 1){
-                    reversedDecimalInteger -= (int)Math.pow(2,31);
-                }
-            }
-
-        }
-        return reversedDecimalInteger;
+        return result;
     }
 
     public static void main(String[] args) {
