@@ -10,24 +10,22 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
-        # First set the current node to the head
-        # of the linked list
-        cur = head
-        # Create a hash set to store all the visited nodes
-        visited_nodes = set()
-        # Run the loop following the .next method until
-        # we reach the end of the linked list
-        while (cur != None):
-            # If the current node is already visited
-            # Return True: we got a cycle
-            if (cur in visited_nodes):
+        # First define the fast and slow pointers
+        # and put them at the start of the list
+        slow, fast = head, head
+        # The speed of the slow pointer will be 1 nodes
+        # per iteration, while the fast pointer will be 2
+
+        # If they don't have a cycle, the fast pointer
+        # will just reach the end of the linked list first
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
                 return True
-            # If the current node is not in the set,
-            # add it 
-            visited_nodes.add(cur)
-            # Go to the next node
-            cur = cur.next
-        # If we do reach the end, there's no cycle
+        
         return False
+
 
         
