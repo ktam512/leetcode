@@ -4,6 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 class Solution(object):
     def isSameTree(self, p, q):
         """
@@ -11,3 +12,14 @@ class Solution(object):
         :type q: TreeNode
         :rtype: bool
         """
+        # If both p and q are None, return True
+        if p is None and q is None:
+            return True
+        # If either p or q is None, return False
+        if p is None or q is None:
+            return False
+        # If the value of p and q is different, return False
+        if p.val != q.val:
+            return False
+        # Recursively check the left and right subtrees
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
