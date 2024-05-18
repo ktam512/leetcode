@@ -5,24 +5,22 @@ class Solution(object):
         :rtype: int
         """
         n = len(height)
-        maxLeft, maxRight = [0]* n, [0]* n
+        # Initialize the pointer and the left and right
+        # max value
+        left, right = 0, n -1
+        leftMax, rightMax = height[left], height[right]
         trapped_water = 0
-        # Fill maxLeft array
-        for i in range(1,n):
-            maxLeft[i] = max(maxLeft[i-1], height[i-1])
-        # Fill maxRight array
-        for i in range(n - 2, 0, -1):
-            maxRight[i] = max(maxRight[i+1], height[i+1])
-        # At each position, the ammount of water trapped
-        # is found by choosing the smaller value and reduce it
-        # by the height
-        for i in range(n):
-            cur_water = min(maxLeft[i], maxRight[i]) - height[i]
-            if (cur_water > 0):
-                # Only when the cur_water value
-                # is positive that we add to the 
-                # total trapped water value
-                trapped_water+=cur_water
+        # Running the loop until the pointer meet
+        while left < right:
+            if leftMax < rightMax:
+                left += 1
+                leftMax = max(leftMax, height[left])
+                trapped_water += leftMax - height[left]
+            else :
+                right -= 1
+                rightMax = max(rightMax, height[right])
+                trapped_water += rightMax - height[right]
+
         return trapped_water
 
 

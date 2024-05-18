@@ -2,26 +2,24 @@ class Solution {
     public int trap(int[] height) {
         // Initialize the length of the array
         int n = height.length;
+        // Initialize the two pointer
+        int left = 0;
+        int right = n - 1;
         // Intialize the two maxLeft and maxRight array
-        int[] maxLeft = new int[n];
-        int[] maxRight = new int[n];
+        int maxLeft = height[left];
+        int maxRight = height[right];
         // Intialize the result total trapped water
         int trappedWater = 0;
-        // Fill the maxLeft array
-        for (int i = 1; i < n; i++ ){
-            maxLeft[i] = Math.max(maxLeft[i-1], height[i-1]);
-        }
-        // Fill the maxRight array
-        for (int i = n-2; i >= 0; i-- ){
-            maxRight[i] = Math.max(maxRight[i+1], height[i+1]);
-        }
-        // Check the values of current water in a specific
-        // position and add it to the total trapped water 
-        // if it's positive
-        for (int i = 0; i < n; i++){
-            int curWater = Math.min(maxLeft[i], maxRight[i])- height[i];
-            if (curWater > 0){
-                trappedWater+=curWater;
+        // Run the loop until two pointer meet each other
+        while (left < right){
+            if (maxLeft < maxRight){
+                left++;
+                maxLeft = Math.max(maxLeft, height[left]);
+                trappedWater += maxLeft - height[left];
+            } else {
+                right--;
+                maxRight = Math.max(maxRight, height[right]);
+                trappedWater += maxRight - height[right];
             }
         }
 
