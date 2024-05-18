@@ -4,26 +4,22 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-        # Initialize the two index
-        i1, i2 = 0, 1
-        cur_max = 0
-        # Using 2 for loops to sort through each 
-        # value of volume
-        n = len(height)
-        for i1 in range(0, n-1):
-            for i2 in range(i1+1, n):
-                # the width is the absolute value between 
-                # two indexes
-                cur_width = abs(i2 - i1)
-                # the height is the smaller value of the two element
-                cur_height = min(height[i1], height[i2])
-                # the current volume is the product of the 
-                # current height and width
-                cur_vol = cur_width * cur_height
-                # the current max volume is updated if 
-                # a bigger current volume is found
-                cur_max = max(cur_vol, cur_max)
-                
-        return cur_max
+        # Initialize the two pointers
+        left, right = 0, len(height) - 1
+        max_vol = 0
+        # End the loop when two pointers meet
+        while(left < right):
+            # Width = absolute value between 2 indexes
+            cur_width = right - left
+            # Height = smaller value of the two elements
+            cur_height = min(height[left], height[right])
+            # Replace the max volume is the bigger one is found
+            max_vol = max(max_vol, cur_width * cur_height)
+            if (height[left] < height[right]):
+                left+=1
+            else:
+                right-=1
+        return max_vol
+
     print(maxArea(1,[1,8,6,2]))
                 
