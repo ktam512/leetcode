@@ -4,8 +4,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        # This solution use the exclusive OR bitwise operations
-        # to solve it
+        # Use the exclusive OR bitwise operations
         res = len(nums)
         for i in range(len(nums)):
             res ^= i ^ nums[i]
