@@ -21,3 +21,18 @@ public class Solution {
         return false;
     }
 }
+
+public class Solution {
+    public boolean canJump(int[] nums) {
+        int maxReachable = 0;
+        int lastIndex = nums.length - 1; // Store the last index
+        
+        // Iterate through each index up to maxReachable
+        for (int i = 0; i <= maxReachable && maxReachable < lastIndex; i++) {
+            maxReachable = Math.max(maxReachable, i + nums[i]);
+        }
+        
+        // Return true if maxReachable reaches or exceeds the last index
+        return maxReachable >= lastIndex;
+    }
+}
