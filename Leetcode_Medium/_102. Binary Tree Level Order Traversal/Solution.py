@@ -4,54 +4,68 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-import collections
-class Solution(object):
-    def levelOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
-        #1th, we create a result list of lists to contain all the 
-        #list of each nodes in each level of the tree
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        # When the root is null / non-existent
+        if not root:
+            return []
         res = []
-        #2th, we check if the root is null or not so that we can do
-        #some more processing
-        if root == None:
-            return res
-        #3th, now we create a queue to store the values of each level of nodes 
-        #from left to right
-        queue = collections.deque()
-        #4th, because we now know that the root exist, we add them to the queue
-        queue.append(root)
-        #5th, now we loop through the while loop as long as the queue is not empty
-        #in another word, when we still have nodes inside the tree
-        while queue:
-            #6th, we create a list to hold all the value of nodes inside the current
-            #level
-            curLevel = []
-            #7th, we find the size of the queue, which is the same as the number
-            #of nodes on the current level
-            size = len(queue)
-            #8th, we loop through the current level's queue and add them to the
-            #current level's list
-            for i in range(size):
-                #9th, we have to use popLeft() as the queue go as FIFO
-                node = queue.popleft()
-                curLevel.append(node.val)
-                #10th, we then check if the child nodes of the current node
-                #is empty or not
-                #If it's not empty, add it to the queue so that in the next iteration
-                #it will be add into the curLevel
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-            
-            #11th, at the end of the for loop, we have a finished list
-            #of the that level. Then we will add that list into the result
-            res.append(curLevel)
-        #12th, at the end of the while loop, return res
+        # The parameter to keep track of the number
+        # of nodes we have to deal with in this level
+        # At the end of the loop (see below),
+        # we will pop the number of node out equal
+        # to this curLevelCount
+        # It starts with 1, since at this current level
+        # we have only 1 node: the root
+        curLevelCount = 1
+        # This parameter keep track of the 
+        # number of node on the next level
+        # Know this by counting the number of chidlren
+        # of each node at this level
+        # At the end of the loop, we update the current level
+        # count to this one, while it return to 0 (to count again)
+        nextLevelCount = 0
+        # The array that will store the 
+        # value of node on this level
+        # it will be filled out by receiving node
+        # that we pop from the queue
+        # At the end of the loop, we will add this
+        # array/list to the result array, completing one level
+        curLevelVal = []
+        # The queue that will store the node that we 
+        # visited/ counted on one level
+        # When the node pop out of the queue, it means
+        # we recorded that node into the curLevelNode
 
+        q = deque()
+        q.append(root)
+
+        while q:
+            node = q.popleft()
+            curLevelVal.append(node.val)
+            # We count the number of node 
+            # next level by counting
+            # the children of the node on
+            # this level
+            if node.left:
+                nextLevelCount += 1
+                q.append(node.left)
+            if node.right:
+                nextLevelCount += 1
+                q.append(node.right)
+            # At each end of the loop,
+            # we will decrement the curLevelCount
+            # (we just pop it out at the start)
+            curLevelCount -=1
+            # Then check if all the node on this level
+            # has been popped out
+            if curLevelCount == 0:
+                res.append(curLevelVal)
+                # Reset the curLevelVal, 
+                # cause we are done with this level
+                curLevelVal = []
+                curLevelCount = nextLevelCount
+                nextLevelCount = 0
         return res
 
 
