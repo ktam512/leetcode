@@ -1,3 +1,4 @@
+(IMPORTANT PROBLEM, we will use it many time in later problems)
 ## Common error
 
 - It’s very easy to forget all of the null option for both trees. Aside from the case that p and q exist and have values, we have 3 different case:
